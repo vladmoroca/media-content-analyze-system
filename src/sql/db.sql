@@ -37,7 +37,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`help` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`help` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `title` TEXT NOT NULL,
   `description` TEXT NOT NULL,
   PRIMARY KEY (`id`))
@@ -50,7 +50,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`filter` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`filter` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `date_from` DATETIME NOT NULL,
   `date_to` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
@@ -84,7 +84,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`access` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`access` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `role` TEXT NOT NULL,
   `user_id` INT NOT NULL,
   `help_id` INT NOT NULL,
@@ -117,7 +117,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`result` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`result` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `title` TEXT NOT NULL,
   `description` TEXT NOT NULL,
   `request_id` INT NOT NULL,

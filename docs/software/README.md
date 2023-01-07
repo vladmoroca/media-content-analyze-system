@@ -10,22 +10,22 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema Media-content-analyze-system
+-- Schema mydb
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `Media-content-analyze-system` ;
+DROP SCHEMA IF EXISTS `mydb` ;
 
 -- -----------------------------------------------------
--- Schema Media-content-analyze-system
+-- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `Media-content-analyze-system` DEFAULT CHARACTER SET utf8 ;
-USE `Media-content-analyze-system` ;
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `Media-content-analyze-system`.`user`
+-- Table `mydb`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Media-content-analyze-system`.`user` ;
+DROP TABLE IF EXISTS `mydb`.`user` ;
 
-CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`user` (
+CREATE TABLE IF NOT EXISTS `mydb`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` TEXT NOT NULL,
   `login` TEXT NOT NULL,
@@ -37,12 +37,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Media-content-analyze-system`.`help`
+-- Table `mydb`.`help`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Media-content-analyze-system`.`help` ;
+DROP TABLE IF EXISTS `mydb`.`help` ;
 
-CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`help` (
-  `id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `mydb`.`help` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `title` TEXT NOT NULL,
   `description` TEXT NOT NULL,
   PRIMARY KEY (`id`))
@@ -50,12 +50,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Media-content-analyze-system`.`filter`
+-- Table `mydb`.`filter`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Media-content-analyze-system`.`filter` ;
+DROP TABLE IF EXISTS `mydb`.`filter` ;
 
-CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`filter` (
-  `id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `mydb`.`filter` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `date_from` DATETIME NOT NULL,
   `date_to` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
@@ -63,11 +63,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Media-content-analyze-system`.`request`
+-- Table `mydb`.`request`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Media-content-analyze-system`.`request` ;
+DROP TABLE IF EXISTS `mydb`.`request` ;
 
-CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`request` (
+CREATE TABLE IF NOT EXISTS `mydb`.`request` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` TEXT NOT NULL,
   `description` TEXT NOT NULL,
@@ -77,19 +77,19 @@ CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`request` (
   INDEX `fk_request_filter1_idx` (`filter_id` ASC) VISIBLE,
   CONSTRAINT `fk_request_filter1`
     FOREIGN KEY (`filter_id`)
-    REFERENCES `Media-content-analyze-system`.`filter` (`id`)
+    REFERENCES `mydb`.`filter` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Media-content-analyze-system`.`access`
+-- Table `mydb`.`access`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Media-content-analyze-system`.`access` ;
+DROP TABLE IF EXISTS `mydb`.`access` ;
 
-CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`access` (
-  `id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `mydb`.`access` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `role` TEXT NOT NULL,
   `user_id` INT NOT NULL,
   `help_id` INT NOT NULL,
@@ -100,29 +100,29 @@ CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`access` (
   INDEX `fk_access_request1_idx` (`request_id` ASC) VISIBLE,
   CONSTRAINT `fk_access_User`
     FOREIGN KEY (`user_id`)
-    REFERENCES `Media-content-analyze-system`.`user` (`id`)
+    REFERENCES `mydb`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Access_Help1`
     FOREIGN KEY (`help_id`)
-    REFERENCES `Media-content-analyze-system`.`help` (`id`)
+    REFERENCES `mydb`.`help` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_access_request1`
     FOREIGN KEY (`request_id`)
-    REFERENCES `Media-content-analyze-system`.`request` (`id`)
+    REFERENCES `mydb`.`request` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Media-content-analyze-system`.`result`
+-- Table `mydb`.`result`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Media-content-analyze-system`.`result` ;
+DROP TABLE IF EXISTS `mydb`.`result` ;
 
-CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`result` (
-  `id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `mydb`.`result` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `title` TEXT NOT NULL,
   `description` TEXT NOT NULL,
   `request_id` INT NOT NULL,
@@ -130,18 +130,18 @@ CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`result` (
   INDEX `fk_result_request1_idx` (`request_id` ASC) VISIBLE,
   CONSTRAINT `fk_result_request1`
     FOREIGN KEY (`request_id`)
-    REFERENCES `Media-content-analyze-system`.`request` (`id`)
+    REFERENCES `mydb`.`request` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Media-content-analyze-system`.`source`
+-- Table `mydb`.`source`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Media-content-analyze-system`.`source` ;
+DROP TABLE IF EXISTS `mydb`.`source` ;
 
-CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`source` (
+CREATE TABLE IF NOT EXISTS `mydb`.`source` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `url` TEXT NOT NULL,
   `request_id` INT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `Media-content-analyze-system`.`source` (
   INDEX `fk_source_request1_idx` (`request_id` ASC) VISIBLE,
   CONSTRAINT `fk_source_request1`
     FOREIGN KEY (`request_id`)
-    REFERENCES `Media-content-analyze-system`.`request` (`id`)
+    REFERENCES `mydb`.`request` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -160,34 +160,34 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `Media-content-analyze-system`.`user`
+-- Data for table `mydb`.`user`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `Media-content-analyze-system`;
-INSERT INTO `Media-content-analyze-system`.`user` (`id`, `name`, `login`, `password`, `email`, `role`) VALUES (DEFAULT, 'John', 'JohnRoth', 'passw123', 'j@email.com', 'public');
-INSERT INTO `Media-content-analyze-system`.`user` (`id`, `name`, `login`, `password`, `email`, `role`) VALUES (DEFAULT, 'Kate', 'KateDotson', 'passw124', 'k@email.com', 'public');
+USE `mydb`;
+INSERT INTO `mydb`.`user` (`id`, `name`, `login`, `password`, `email`, `role`) VALUES (DEFAULT, 'John', 'JohnRoth', 'passw123', 'j@email.com', 'public');
+INSERT INTO `mydb`.`user` (`id`, `name`, `login`, `password`, `email`, `role`) VALUES (DEFAULT, 'Kate', 'KateDotson', 'passw124', 'k@email.com', 'public');
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `Media-content-analyze-system`.`request`
+-- Data for table `mydb`.`request`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `Media-content-analyze-system`;
-INSERT INTO `Media-content-analyze-system`.`request` (`id`, `title`, `description`, `date`, `filter_id`) VALUES (DEFAULT, 'Text search query ', 'breaking news around the world', '2022-12-02', NULL);
-INSERT INTO `Media-content-analyze-system`.`request` (`id`, `title`, `description`, `date`, `filter_id`) VALUES (DEFAULT, 'Photo search query', 'find similar images', '2022-11-20', NULL);
+USE `mydb`;
+INSERT INTO `mydb`.`request` (`id`, `title`, `description`, `date`, `filter_id`) VALUES (DEFAULT, 'Text search query ', 'breaking news around the world', '2022-12-02', NULL);
+INSERT INTO `mydb`.`request` (`id`, `title`, `description`, `date`, `filter_id`) VALUES (DEFAULT, 'Photo search query', 'find similar images', '2022-11-20', NULL);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `Media-content-analyze-system`.`source`
+-- Data for table `mydb`.`source`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `Media-content-analyze-system`;
-INSERT INTO `Media-content-analyze-system`.`source` (`id`, `url`, `request_id`) VALUES (DEFAULT, 'https://www.nytimes.com/', NULL);
-INSERT INTO `Media-content-analyze-system`.`source` (`id`, `url`, `request_id`) VALUES (DEFAULT, 'https://images.google.com/', NULL);
+USE `mydb`;
+INSERT INTO `mydb`.`source` (`id`, `url`, `request_id`) VALUES (DEFAULT, 'https://www.nytimes.com/', NULL);
+INSERT INTO `mydb`.`source` (`id`, `url`, `request_id`) VALUES (DEFAULT, 'https://images.google.com/', NULL);
 
 COMMIT;
 ```
