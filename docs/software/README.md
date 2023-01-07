@@ -194,4 +194,156 @@ COMMIT;
 
 ## RESTfull сервіс для управління даними
 
+### Головний файл, з якого відбувається запуск сервера
 
+```js
+const express = require('express');
+const bodyParser = require('body-parser');
+const connection = require('./connection');
+const router = require('./router');
+
+const app = express();
+const port = 3030;
+
+connection.connect();
+
+app.use(bodyParser.json());
+app.use(router);
+
+app.listen(port, () => {
+  console.log(`Server started on localhost:${port}`);
+});
+```
+
+### Модуль підключення до бази даних
+
+```js
+const mysql = require('mysql2');
+
+const connectionUrl = 'mysql://root:k1llr34l@localhost:3306/mydb';
+const connection = mysql.createConnection({
+  uri: connectionUrl
+});
+
+module.exports = connection;
+```
+
+### Модуль з реалізацією REST API до таблиці Result
+
+```js
+const express = require('express');
+const connection = require('./connection');
+const router = express.Router();
+
+router.post('/result', (req, res) => {
+  const { title, description, request_id } = req.body;
+  
+  if(!(title && description && request_id)) {
+    res.send('There is empty field.');
+    return;
+  }
+  
+  connection.query(
+    `INSERT INTO result (id, title, description, request_id) 
+    VALUES (DEFAULT, '${title}', '${description}', ${request_id})`,
+  (error) => {
+    if (error) {
+      console.log(error);
+      res.send('Something went wrong.');
+      return;
+    }
+    res.send('Record has been added');
+  });
+});
+  
+router.post('/result/:id', (req, res) => {
+  const id = req.params.id;
+  const { title, description, request_id } = req.body;
+  
+  if(!(title && description && request_id)) {
+    res.send('There is empty field.');
+    return;
+  } 
+  
+  connection.query(
+    `INSERT INTO result (id, title, description, request_id) 
+    VALUES (${id}, '${title}', '${description}', ${request_id})`,
+  (error) => {
+    if (error) {
+      console.log(error);
+      res.send('Something went wrong.');
+      return;
+    }
+    res.send('Record has been added');
+  });
+});
+  
+router.get('/results', (req, res) => {
+  connection.query('SELECT * FROM result', 
+  (error, result) => {
+    if (error) {
+      console.log(error);
+      res.send('Something went wrong.');
+      return;
+    }
+    res.send(result);
+  });
+});
+  
+router.get('/result/:id', (req, res) => {
+  const id = req.params.id;
+  connection.query(`SELECT * FROM result WHERE id = ${id}`,
+  (error, result) => {
+    if (error) {
+      console.log(error);
+      res.send('Something went wrong.');
+      return;
+    }
+    res.send(result);
+  });
+});
+  
+router.put('/result/:id', (req, res) => {
+  const id = req.params.id;
+  
+  connection.query(`SELECT * FROM result WHERE id = ${id}`,
+  (error, [result]) => {
+    if (error) {
+      console.log(result);
+      console.log(error);
+      res.send('Something went wrong.');
+      return;
+    }
+    const { title, description, request_id } = { ...result, ...req.body};
+    connection.query(
+      `UPDATE result 
+      SET title = '${title}', 
+      description = '${description}', 
+      request_id = ${request_id} 
+      WHERE id = ${id}`,
+    (error) => {
+      if (error) {
+        console.log(error);
+        res.send('Something went wrong.');
+        return;
+      }
+      res.send('Record has been updated');
+    });
+  });
+});
+  
+router.delete('/result/:id', (req, res) => {
+  const id = req.params.id;
+  connection.query(`DELETE FROM result WHERE id = ${id}`,
+  (error) => {
+    if (error) {
+      console.log(error);
+      res.send('Something went wrong.');
+      return;
+    }
+    res.send('Record has been deleted');
+  });
+});
+
+module.exports = router;
+```
