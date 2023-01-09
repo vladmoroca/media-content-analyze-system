@@ -11,7 +11,7 @@
 
 ### POST - create
 
-#### Таблиця до запиту
+#### Таблиця перед запитом
 ![alt text](./img/post_before.png)
 #### Запит
 ![alt text](./img/post.png)
@@ -27,7 +27,7 @@
 
 ### PUT - update
 
-#### Елемент до запиту
+#### Елемент перед запитом
 ![alt text](./img/get_id.png)
 #### Запит
 ![alt text](./img/put.png)
@@ -36,7 +36,7 @@
 
 ### DELETE
 
-#### Таблиця до запиту
+#### Таблиця перед запитом
 ![alt text](./img/delete_before.png)
 #### Запит
 ![alt text](./img/delete.png)
