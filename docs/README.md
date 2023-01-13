@@ -8,7 +8,7 @@ footer: "ECL 2.0 Licensed | Copyright © [2022] [???]"
 
 **Курсову роботу виконав:**
 
-*студент 2-го курсу, групи IM-11*<span padding-right:5em></span> **Букач Кирило [telegram](https://t.me/llumiss)**
+*студент 2-го курсу, групи IM-11*<span padding-right:5em></span> **Мороченець Владислав  [telegram](https://t.me/vladmoroca)**
 
 **Команда:** 
 
@@ -16,7 +16,7 @@ footer: "ECL 2.0 Licensed | Copyright © [2022] [???]"
 
 *студент 2-го курсу, групи IM-11*<span padding-right:5em></span> **Карімлі Зія [telegram](https://t.me/ziya_04)**
 
-*студент 2-го курсу, групи IM-11*<span padding-right:5em></span> **Мороченець Владислав  [telegram](https://t.me/vladmoroca)**
+*студент 2-го курсу, групи IM-11*<span padding-right:5em></span> **Букач Кирило [telegram](https://t.me/llumiss)**
 
 *студент 2-го курсу, групи IM-11*<span padding-right:5em></span> **Олійник Віктор [telegram](https://t.me/VictorOliinyk)**
 

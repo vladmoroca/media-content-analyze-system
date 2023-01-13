@@ -15,12 +15,12 @@
 ![alt text](./img/post_before.png)
 #### Запит
 ![alt text](./img/post.png)
-#### Таблиця після запиту
+#### Таблиця після запиту (різниця в дві години через приведення до Гринвіцького часу)
 ![alt text](./img/post_after.png)
 
 ### GET - read
 
-#### Усі елементи
+#### Усі елементи (додав ще один)
 ![alt text](./img/post_after.png)
 #### Пошук за ID
 ![alt text](./img/get_id.png)

@@ -1,8 +1,9 @@
 const mysql = require('mysql2');
 
-const connectionUrl = 'mysql://root:k1llr34l@localhost:3306/mydb';
+const connectionUrl = 'mysql://root@localhost:3306/mydb';
 const connection = mysql.createConnection({
-  uri: connectionUrl
+  uri: connectionUrl,
+  password: 'dkflred21',
 });
 
 module.exports = connection;
