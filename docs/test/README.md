@@ -20,7 +20,7 @@
 
 ### GET - read
 
-#### Усі елементи (додав ще один)
+#### Усі елементи
 ![alt text](./img/post_after.png)
 #### Пошук за ID
 ![alt text](./img/get_id.png)
@@ -36,7 +36,7 @@
 
 ### DELETE
 
-#### Таблиця перед запитом
+#### Таблиця перед запитом (додав ще один)
 ![alt text](./img/delete_before.png)
 #### Запит
 ![alt text](./img/delete.png)
